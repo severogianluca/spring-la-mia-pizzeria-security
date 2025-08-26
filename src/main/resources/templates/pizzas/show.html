@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+</head>
+
+<body class="bg-principale">
+    <header th:insert="~{fragments/navbar :: navbar}">
+
+    </header>
+
+    <main class="mb-3 container" th:object="${pizza}">
+        <h1 th:text="${pizza.nome}" class="text-center mt-5"></h1>
+
+        <div>
+            <div class="card p-3 mb-4 mt-5">
+                <div class="d-flex">
+                    <div class="card-body">
+                        <h5 th:text="*{nome}" class="card-title"></h5>
+                        <!-- Blocco per visualizzare gli ingredienti -->
+                        <th:block th:if="${pizza.getIngredienti().size() > 0}">
+                            <h3 class="mb-2">ingredienti:</h3>
+                            <ul class="mb-3 ps-4">
+                                <li th:each="ingrediente : *{ingredienti}" th:text="${ingrediente.nome}" />
+                            </ul>
+                        </th:block>
+
+                        <!-- Blocco per messaggio quando non ci sono ingredienti -->
+                        <th:block th:unless="${pizza.getIngredienti().size() > 0}">
+                            <p class="mb-3 alert alert-info">This pizza has no ingredients</p>
+                        </th:block>
+
+
+                        <p th:text="*{descrizione}" class="card-text"></p>
+                        <p th:text="|*{prezzo}€|" class="card-text"></p>
+                        <a th:href="@{/pizzas}" type="button" class="btn btn-danger">Indietro</a>
+                        <a th:href="@{/pizzas/{id}/offerta(id=${pizza.id})}" type="button" class="btn btn-success">Crea
+                            offerta</a>
+
+                    </div>
+                    <div class="img-container">
+                        <img th:src="${pizza.fotoUrl}" alt="Foto pizza" class="card-img-top img-fluid p-2" />
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <h3 class="text-center">Offerte speciali </h3>
+
+            <div th:unless="*{offerteSpeciali.size() > 0}">
+                <div class=" alert alert-warning">
+                    <h4>Non ci sono offerte speciali</h4>
+                </div>
+            </div>
+            <div th:if="*{offerteSpeciali.size() > 0}">
+                <div th:each="offerta :*{offerteSpeciali}" class="card mb-3">
+                    <div class="card-body">
+                        <div class="row text-center align-items-center">
+                            <div class="col-4">
+                                <h5><strong th:text="${offerta.title}" class="card-text" style="z-index: 2;"></strong>
+                                </h5>
+                                <img th:src="@{/img/offerta-speciale.png}" alt="offerta-logo" class="img-fluid" style=" position: absolute; top: 50%; left: 50%; 
+                                transform: translate(-50%, -50%);
+                                opacity: 0.5; z-index: 1; max-width: 100px; pointer-events: none;" />
+                            </div>
+                            <div class="col-4">
+                                <p th:text="|Dal: ${(offerta.startSpecialOffer)}|" class="card-text"></p>
+                                <p th:text="|Al: ${(offerta.finishSpecialOffer)}|" class="card-text"></p>
+                            </div>
+                            <div class="col-4">
+                                <form th:action="@{/offerta/delete/{id}(id=${offerta.id})}" method="post">
+                                    <button type="submit" class="btn btn-outline-danger">Elimina</button>
+                                    <a th:href="@{/offerta/edit/{id}(id=${offerta.id})}"
+                                        class="btn btn-outline-success">Modifica</a>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+    </main>
+
+</body>
+
+</html>

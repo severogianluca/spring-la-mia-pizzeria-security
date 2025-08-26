@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body class="bg-principale">
+    <header th:insert="~{fragments/navbar :: navbar}"></header>
+
+    <main class="container ">
+        <h1 th:text="${ingrediente.nome}" class="mt-4">Nome ingrediente</h1>
+        <p><strong>Descrizione:</strong> <span th:text="${ingrediente.descrizione}"></span></p>
+        <a th:href="@{/ingredienti}" type="button" class="btn btn-danger">Indietro</a>
+    </main>
+
+
+    <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

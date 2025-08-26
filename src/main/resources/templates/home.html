@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- Boostrap -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+
+    <!-- css -->
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body class="bg-principale">
+    <header th:insert="~{fragments/navbar :: navbar}">
+    </header>
+
+    <main>
+        <div class="container">
+
+
+            <h1 class="mt-5 mb-4 text-center">Benvenuti da “A Pizza der Sevv”! La casa della Pizza Romana!</h1>
+            <p>
+                Qui celebriamo la vera tradizione romana, portando in tavola impasti croccanti, stesi sottili come vuole
+                la ricetta originale, e farciture che esaltano i sapori autentici del territorio. Ogni pizza è frutto di
+                passione, esperienza e ingredienti selezionati con cura, dal pomodoro profumato alla mozzarella filante,
+                passando per salumi, verdure e condimenti di prima qualità. Lasciati conquistare dal gusto unico della
+                pizza romana, preparata secondo tradizione ma con un tocco di creatività. Ti aspettiamo per
+                un’esperienza genuina, conviviale e… tutta da mordere!
+
+
+            </p>
+            <div class="text-center">
+                <img src="/img/A-pizza-der-sevv.png" alt="pizza-img" style="width: 600px; height: auto;">
+            </div>
+        </div>
+
+
+        </p>
+    </main>
+</body>
+
+</html>

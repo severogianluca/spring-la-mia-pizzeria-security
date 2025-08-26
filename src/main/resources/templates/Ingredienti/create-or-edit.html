@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body class="bg-principale">
+    <header th:insert="~{fragments/navbar :: navbar}">
+
+    </header>
+
+    <main class="mb-3 container">
+        <div class="row">
+            <div class="class col-12">
+                <th:bloc>
+                    <h1 th:if="${edit}" class="text-center mt-5 mb-4">Modifica l'ingredienti</h1>
+                    <h1 th:unless="${edit}" class="text-center mt-5 mb-4">Inserisci un nuovo ingrediente</h1>
+
+                    <div>
+                        <form id="ingrediente-form" th:object="${ingrediente}"
+                            th:action="${edit} ? @{/ingredienti/edit/${ingrediente.id}} : @{/ingredienti/create}"
+                            method="post">
+
+
+                            
+                            <input type="hidden" th:field="*{id}" /> 
+
+
+
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome ingrediente</label>
+                                <input id="nome" class="form-control" type="text" placeholder="Inserisci l'ingrediente"
+                                    th:field="*{nome}" th:errorClass="is-invalid">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}">
+                                    <ul>
+                                        <li th:each="error : ${#fields.errors('nome')}" th:text="${error}"></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="descrizione" class="form-label">Descrizione</label>
+                                <input id="descrizione" class="form-control" type="text"
+                                    placeholder="Inserisci una descrizione" th:field="*{descrizione}"
+                                    th:errorClass="is-invalid">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('descrizione')}">
+                                    <ul>
+                                        <li th:each="error : ${#fields.errors('descrizione')}" th:text="${error}"></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            <div class="mb-3 d-flex justify-content-between">
+                                <a th:href="@{/ingredienti}" type="button" class="btn btn-danger">Indietro</a>
+
+                                <input type="submit" class="btn btn-success" value="save">
+
+                            </div>
+
+                            <div>
+                            </div>
+                        </form>
+                    </div>
+                </th:bloc>
+            </div>
+        </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

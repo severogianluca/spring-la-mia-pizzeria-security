@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+
+        <!-- css -->
+
+
+</head>
+
+<body>
+
+    <nav th:fragment="navbar" class="navbar tricolore">
+        <div class="container-fluid">
+            <div>
+                <span class="navbar-brand mb-0 h1">A pizza der Sevv</span>
+            </div>
+
+            <div>
+                <a class="navbar-brand" th:href="@{/}">Home</a>
+                <a class="navbar-brand" th:href="@{/pizzas}">E pizze</a>
+                <a class="navbar-brand" th:href="@{/ingredienti}">Ingredienti</a>
+                <!-- <a class="navbar-brand" href="songs">Bevande</a> -->
+            </div>
+            <div>
+                <img src="/img/pizza-logo.png" alt="pizza-logo" class="navbar-logo" />
+            </div>
+
+        </div>
+
+    </nav>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body class="bg-principale">
+    <header th:insert="~{fragments/navbar :: navbar}">
+
+    </header>
+
+    <main class="mb-3 container">
+        <div class="row">
+            <div class="class col-12">
+                <th:bloc>
+                    <h1 class="text-center mt-5 mb-4">Modifica l'offerta speciale</h1>
+                    <div>
+                        <form id="pizza-form" th:action="@{/offerta/create}" th:object="${offertaSpeciale}"
+                            method="post">
+
+                            <input type="hidden" th:field="*{pizza.id}" />
+                            <input type="hidden" th:field="*{id}" />
+
+
+
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Nome offerta</label>
+                                <input id="title" class="form-control" type="text"
+                                    placeholder="Inserisci la tua offerta" th:field="*{title}"
+                                    th:errorClass="is-invalid">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
+                                    <ul>
+                                        <li th:each="error : ${#fields.errors('title')}" th:text="${error}"></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="startSpecialOffer" class="form-label">Data inizio</label>
+                                <input id="startSpecialOffer" class="form-control" type="date"
+                                    th:field="*{startSpecialOffer}" th:errorClass="is-invalid">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('startSpecialOffer')}">
+                                    <ul>
+                                        <li th:each="error : ${#fields.errors('startSpecialOffer')}" th:text="${error}">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="finishSpecialOffer" class="form-label">Data fine</label>
+                                <input id="finishSpecialOffer" class="form-control" type="date"
+                                    th:field="*{finishSpecialOffer}" th:errorClass="is-invalid">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('finishSpecialOffer')}">
+                                    <ul>
+                                        <li th:each="error : ${#fields.errors('finishSpecialOffer')}"
+                                            th:text="${error}">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex justify-content-between">
+                                <a th:href="@{/pizzas/{id}(id=${pizza.id})}" type="button"
+                                    class="btn btn-danger">Indietro</a>
+                                <input type="submit" class="btn btn-success" value="Create offerta">
+
+                            </div>
+
+                            <div>
+                            </div>
+                        </form>
+                    </div>
+                </th:bloc>
+            </div>
+        </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

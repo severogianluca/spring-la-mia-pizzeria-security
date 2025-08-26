@@ -1,0 +1,47 @@
+.navbar-logo {
+  height: 80px;
+  width: auto;
+}
+
+a.card {
+  text-decoration: none;
+}
+
+.bg-principale {
+  background-color: #faf3e0;
+}
+
+.tricolore {
+  background-image: linear-gradient(to right, #c0392b, #ffffff, #2e8b57);
+}
+
+.card-img-top {
+  max-height: 130px;
+  object-fit: cover;
+  width: auto;
+}
+
+.img-container {
+  width: 220px;
+  height: auto;
+  padding-top: 25px;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+.offerta {
+  width: 40px;
+  height: 40px;
+}
+
+table.table.custom-table,
+table.table.custom-table th,
+table.table.custom-table td {
+    --bs-table-bg: #faf3e0;
+  width: 100%;
+  table-layout: fixed;
+}
