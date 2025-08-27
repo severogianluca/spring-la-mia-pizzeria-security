@@ -48,7 +48,7 @@ public class PizzaRestController {
 
     @PostMapping
     public ResponseEntity<PizzaModel> store(@RequestBody PizzaModel pizza) {
-        return new ResponseEntity<PizzaModel>(pizzaService.createPizza(pizza), HttpStatus.OK);
+        return new ResponseEntity<PizzaModel>(pizzaService.save(pizza), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
@@ -59,7 +59,7 @@ public class PizzaRestController {
         }
         // setto per garantire che modifichi un id gia esistente
         pizza.setId(id);
-        return new ResponseEntity<PizzaModel>(pizzaService.updatePizza(pizza), HttpStatus.OK);
+        return new ResponseEntity<PizzaModel>(pizzaService.save(pizza), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
