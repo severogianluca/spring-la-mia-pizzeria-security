@@ -14,6 +14,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final DatabaseUserDetailService databaseUserDetailService;
+
+    SecurityConfig(DatabaseUserDetailService databaseUserDetailService) {
+        this.databaseUserDetailService = databaseUserDetailService;
+    }
+
     @Bean
     @SuppressWarnings("removal")
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -31,19 +37,23 @@ public class SecurityConfig {
         return http.build();
     }
 
+    @Bean
     @SuppressWarnings("deprecation")
     DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 
-        authenticationProvider.setUserDetailsService(null);
+        authenticationProvider.setUserDetailsService(userDetailService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
-
         return authenticationProvider;
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    DatabaseUserDetailService userDetailService(){
+        return new DatabaseUserDetailService();
+    }
 
+    @Bean
+    PasswordEncoder passwordEncoder(){
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
 
-        <!-- css -->
+    <!-- css -->
 
 
 </head>
@@ -16,17 +16,29 @@
     <nav th:fragment="navbar" class="navbar tricolore">
         <div class="container-fluid">
             <div>
-                <span class="navbar-brand mb-0 h1">A pizza der Sevv</span>
+                <img src="/img/pizza-logo.png" alt="pizza-logo" class="navbar-logo" />
             </div>
 
             <div>
                 <a class="navbar-brand" th:href="@{/}">Home</a>
                 <a class="navbar-brand" th:href="@{/pizzas}">E pizze</a>
-                <a class="navbar-brand" th:href="@{/ingredienti}">Ingredienti</a>
+                <a class="navbar-brand" th:href="@{/ingredienti}" sec:authorize="hasAuthority('ADMIN')">Ingredienti</a>
                 <!-- <a class="navbar-brand" href="songs">Bevande</a> -->
             </div>
-            <div>
-                <img src="/img/pizza-logo.png" alt="pizza-logo" class="navbar-logo" />
+            <div class="user-info d-flex justify-content-between align-items-center gap-2">
+                <div>
+                    user: <span sec:authentication="name" class="fw-bold"></span>
+
+                </div>
+                <div>
+                    <span sec:authentication="principal.authorities" class="fw-bold"></span>
+
+                </div>
+                <div>
+                    <a href="/logout" class="btn btn-sm btn-outline-primary">Sign out</a>
+
+                </div>
+
             </div>
 
         </div>

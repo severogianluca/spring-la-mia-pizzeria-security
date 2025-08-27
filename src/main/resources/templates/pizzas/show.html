@@ -22,10 +22,10 @@
             <div class="card p-3 mb-4 mt-5">
                 <div class="d-flex">
                     <div class="card-body">
-                        <h5 th:text="*{nome}" class="card-title"></h5>
+                        <h2 th:text="*{nome}" class="card-title"></h2>
                         <!-- Blocco per visualizzare gli ingredienti -->
                         <th:block th:if="${pizza.getIngredienti().size() > 0}">
-                            <h3 class="mb-2">ingredienti:</h3>
+                            <h4 class="mb-2">ingredienti:</h4>
                             <ul class="mb-3 ps-4">
                                 <li th:each="ingrediente : *{ingredienti}" th:text="${ingrediente.nome}" />
                             </ul>
@@ -40,7 +40,7 @@
                         <p th:text="*{descrizione}" class="card-text"></p>
                         <p th:text="|*{prezzo}€|" class="card-text"></p>
                         <a th:href="@{/pizzas}" type="button" class="btn btn-danger">Indietro</a>
-                        <a th:href="@{/pizzas/{id}/offerta(id=${pizza.id})}" type="button" class="btn btn-success">Crea
+                        <a th:href="@{/pizzas/{id}/offerta(id=${pizza.id})}" type="button" class="btn btn-success" sec:authorize="hasAuthority('ADMIN')">Crea
                             offerta</a>
 
                     </div>
@@ -79,9 +79,9 @@
                             </div>
                             <div class="col-4">
                                 <form th:action="@{/offerta/delete/{id}(id=${offerta.id})}" method="post">
-                                    <button type="submit" class="btn btn-outline-danger">Elimina</button>
+                                    <button type="submit" class="btn btn-outline-danger" sec:authorize="hasAuthority('ADMIN')">Elimina</button>
                                     <a th:href="@{/offerta/edit/{id}(id=${offerta.id})}"
-                                        class="btn btn-outline-success">Modifica</a>
+                                        class="btn btn-outline-success" sec:authorize="hasAuthority('ADMIN')">Modifica</a>
                                 </form>
 
                             </div>

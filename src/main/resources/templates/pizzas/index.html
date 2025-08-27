@@ -16,7 +16,8 @@
         <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
             <h1 class="">Le nostre pizze</h1>
             <div>
-                <a th:href="@{/pizzas/create}" type="button" class="btn btn-success">Create new pizza</a>
+                <a th:href="@{/pizzas/create}" type="button" class="btn btn-success" sec:authorize="hasAuthority('ADMIN')">Create new pizza</a>
+                <h3 th:text="|Benvenuto ${username}" sec:authorize="hasAuthority('USER')"></h3>
             </div>
         </div>
 
@@ -32,11 +33,12 @@
                     <div class="d-flex">
                         <!-- BOTTONE PER LA MODALE -->
                         <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal"
-                            th:attr="data-bs-target=|#deleteModal-${pizza.id}|">
+                            th:attr="data-bs-target=|#deleteModal-${pizza.id}|"
+                            sec:authorize="hasAuthority('ADMIN')">
                             Elimina
                         </button>
 
-                        <a th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" class="btn btn-outline-success">Modifica</a>
+                        <a th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" class="btn btn-outline-success" sec:authorize="hasAuthority('ADMIN')">Modifica</a>
                     </div>
                 </div>
 

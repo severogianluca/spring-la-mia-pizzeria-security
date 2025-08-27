@@ -27,12 +27,7 @@ public class PizzaService {
         return pizzaRepository.findByNomeContaining(nome);
     }
 
-    public PizzaModel createPizza(PizzaModel pizza) {
-        return pizzaRepository.save(pizza);
-
-    }
-
-    public PizzaModel updatePizza(PizzaModel pizza) {
+    public PizzaModel save(PizzaModel pizza) {
         return pizzaRepository.save(pizza);
 
     }
