@@ -23,6 +23,7 @@ public class PizzaService {
         return pizzaRepository.findById(id);
     }
 
+    // query custom
     public List<PizzaModel> findByname(String nome) {
         return pizzaRepository.findByNomeContaining(nome);
     }

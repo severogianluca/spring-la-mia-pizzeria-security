@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -22,24 +23,24 @@ public class SecurityConfig {
 
     @Bean
     @SuppressWarnings("removal")
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.authorizeHttpRequests()
-            .requestMatchers("/pizzas/create", "/pizzas/edit/**").hasAuthority("ADMIN")
-            // tutte le richieste sul metodo post è ADMIN
-            .requestMatchers(HttpMethod.POST, "/pizzas/**").hasAuthority("ADMIN")
-            .requestMatchers("/ingredienti", "/ingredienti/**").hasAuthority("ADMIN")
-            .requestMatchers("/pizzas", "/pizzas/**").hasAnyAuthority("USER","ADMIN")
-            .requestMatchers("/**").permitAll()
-            .and().formLogin()
-            .and().logout()
-            .and().exceptionHandling();
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(requests -> requests
+                .requestMatchers("/pizzas/create", "/pizzas/edit/**").hasAuthority("ADMIN")
+                // tutte le richieste sul metodo post è ADMIN
+                .requestMatchers(HttpMethod.POST, "/pizzas/**").hasAuthority("ADMIN")
+                .requestMatchers("/ingredienti", "/ingredienti/**").hasAuthority("ADMIN")
+                .requestMatchers("/pizzas", "/pizzas/**").hasAnyAuthority("USER", "ADMIN")
+                .requestMatchers("/**").permitAll())
+                .formLogin(Customizer.withDefaults())
+                .logout(Customizer.withDefaults())
+                .exceptionHandling(Customizer.withDefaults());
 
         return http.build();
     }
 
     @Bean
     @SuppressWarnings("deprecation")
-    DaoAuthenticationProvider authenticationProvider(){
+    DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 
         authenticationProvider.setUserDetailsService(userDetailService());
@@ -48,12 +49,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    DatabaseUserDetailService userDetailService(){
+    DatabaseUserDetailService userDetailService() {
         return new DatabaseUserDetailService();
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

@@ -31,7 +31,11 @@
 
                 </div>
                 <div>
-                    <span sec:authentication="principal.authorities" class="fw-bold"></span>
+
+                    <span sec:authorize="isAuthenticated()" sec:authentication="principal.authorities"
+                        class="fw-bold"></span>
+                    <span sec:authorize="isAnonymous()" class="fw-bold text-muted">Guest</span>
+
 
                 </div>
                 <div>
